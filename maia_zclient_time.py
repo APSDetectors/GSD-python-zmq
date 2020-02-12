@@ -201,9 +201,13 @@ class zclient(object):
         print "Rate set to %.2f MHz" % (400e6/(n+1) / 1e6)
 
     def set_framelen(self,value):
-        print "framelen: %d" %  (value*25000000)
-    	self.write(0xD4,value*25000000)
-        print "Frame length set to %d secs" % value
+        # 40ns firmware - old
+		#print "framelen: %d" %  (value*25000000)
+    	# self.write(0xD4,value*25000000)
+		# 1 us firmware - new
+		print "framelen: %d" %  (value*1000000)
+		self.write(0xD4,value*1000000)
+		print "Frame length set to %d secs" % value
 
     def start_frame(self):
         self.write(0xD0,1)
